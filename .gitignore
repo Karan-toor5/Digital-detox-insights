@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python packaging
+dist/
+build/
+*.egg-info
+
+# Streamlit cache
+.streamlit/
+
+# Dataset (optional to avoid committing large files)
+dataset/digital_wellness.csv
