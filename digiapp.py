@@ -74,15 +74,27 @@ st.markdown("""
     - Generate meaningful insights to encourage healthier digital habits.
  """)
 @st.cache_data
+@st.cache_data
 def load_data():
 
     try:
-        df=pd.read_csv("/dataset/digital_detox.csv")
+
+        df = pd.read_csv("dataset/digital_detox.csv")
+
         return df
+
     except Exception as e:
-        st.error(e)
+
+        st.error(f"Error loading dataset: {e}")
+
         return None
-df=load_data()
+
+
+df = load_data()
+
+if df is None:
+
+    st.stop()
 st.header("Data Overview")
 # Create Basic Dataset Information table
 dataset_info = pd.DataFrame({
