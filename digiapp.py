@@ -77,7 +77,7 @@ st.markdown("""
 def load_data():
 
     try:
-        df=pd.read_csv("digital_detox.csv")
+        df=pd.read_csv("/dataset/digital_detox.csv")
         return df
     except Exception as e:
         st.error(e)
