@@ -1,4 +1,4 @@
-import numpy as np
+8import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -262,4 +262,33 @@ with tab4:
 # Data Cleaning
 # -------------------------------
 
-st.write(df.dtypes)
+@st.cache_data
+def clean_data(df):
+
+    cleaned_df = df.copy()
+
+    # Replace missing value symbols
+    cleaned_df.replace(["??", "###", "-", "NA", "N/A"], np.nan, inplace=True)
+
+    # Remove duplicate rows
+    cleaned_df.drop_duplicates(inplace=True, ignore_index=True)
+
+    # Fill missing values
+    for col in cleaned_df.columns:
+
+        if pd.api.types.is_numeric_dtype(cleaned_df[col]):
+
+            cleaned_df[col] = cleaned_df[col].fillna(
+                cleaned_df[col].median()
+            )
+
+        else:
+
+            cleaned_df[col] = cleaned_df[col].fillna(
+                cleaned_df[col].mode()[0]
+            )
+
+    return cleaned_df
+
+
+cleaned_df = clean_data(df)
