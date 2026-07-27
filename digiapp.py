@@ -292,3 +292,29 @@ def clean_data(df):
 
 
 cleaned_df = clean_data(df)
+st.header("Visualization")
+st.subheader("Average Screen Time By Age")
+age_avg = df.groupby("age", as_index=False)["daily_screen_time_hours"].mean()
+
+fig = px.line(
+    age_avg,
+    x="age",
+    y="daily_screen_time_hours",
+    markers=True
+)
+
+fig.update_layout(
+    title={
+        "text":"Average Screen Time by Age",
+        "x":0.5,
+        "font":dict(size=22)
+    },
+    xaxis_title="Age",
+    yaxis_title="Average Screen Time (Hours)",
+
+    height=500,
+    width=850,
+    font=dict(size=14)
+)
+
+st.ploty_chart(fig,use_container_width=True)
