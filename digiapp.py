@@ -262,26 +262,4 @@ with tab4:
 # Data Cleaning
 # -------------------------------
 
-@st.cache_data
-def clean_data(df):
-
-    cleaned_df = df.copy()
-
-    # Replace common missing value symbols
-    cleaned_df.replace(["??", "###", "-", "NA", "N/A"], np.nan, inplace=True)
-
-    # Remove duplicate rows
-    cleaned_df.drop_duplicates(inplace=True)
-
-    # Fill missing values
-    for col in cleaned_df.columns:
-
-        if cleaned_df[col].dtype == "object":
-            cleaned_df[col].fillna(cleaned_df[col].mode()[0], inplace=True)
-
-        else:
-            cleaned_df[col].fillna(cleaned_df[col].median(), inplace=True)
-
-    return cleaned_df
-
-cleaned_df = clean_data(df)
+st.write(df.dtypes)
