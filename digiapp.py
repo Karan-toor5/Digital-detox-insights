@@ -279,12 +279,141 @@ def cleaned_data():
         return None
 cleaned_df = cleaned_data()
 
+# Initialize Session State
+
+if "selected_gender" not in st.session_state:
+    st.session_state.selected_gender = sorted(cleaned_df["gender"].unique())
+
+if "selected_age" not in st.session_state:
+    st.session_state.selected_age = (
+        int(cleaned_df["age"].min()),
+        int(cleaned_df["age"].max())
+    )
+
+if "selected_addiction" not in st.session_state:
+    st.session_state.selected_addiction = sorted(cleaned_df["addiction_level"].unique())
+
+if "selected_stress" not in st.session_state:
+    st.session_state.selected_stress = sorted(cleaned_df["stress_level"].unique())
+
+if "selected_label" not in st.session_state:
+    st.session_state.selected_label = sorted(cleaned_df["addicted_label"].unique())
+
+# Sidebar Filters
+with st.sidebar:
+
+    st.header("🎯 Filters")
+
+    gender = st.multiselect(
+        "👤 Gender",
+        options=sorted(cleaned_df["gender"].unique())
+    )
+
+    addiction = st.multiselect(
+        "📱 Addiction Level",
+        options=sorted(cleaned_df["addiction_level"].unique())
+    )
+
+    stress = st.multiselect(
+        "😣 Stress Level",
+        options=sorted(cleaned_df["stress_level"].unique())
+    )
+
+    label = st.multiselect(
+        "⚠️ Addiction Status",
+        options=sorted(cleaned_df["addicted_label"].unique())
+    )
+
+    age = st.slider(
+        "🎂 Age",
+        min_value=int(cleaned_df["age"].min()),
+        max_value=int(cleaned_df["age"].max()),
+        value=st.session_state.selected_age
+    )
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        apply = st.button(
+            "✅ Apply",
+            use_container_width=True,
+            type="primary"
+        )
+
+    with col2:
+        reset = st.button(
+            "🔄 Reset",
+            use_container_width=True
+    )
+#Apply Filters
+if apply:
+
+    st.session_state.selected_gender = gender
+
+    st.session_state.selected_addiction = addiction
+
+    st.session_state.selected_stress = stress
+
+    st.session_state.selected_label = label
+
+    st.session_state.selected_age = age
+#Reset Filters   
+if reset:
+
+    st.session_state.selected_gender = sorted(cleaned_df["gender"].unique())
+
+    st.session_state.selected_addiction = sorted(cleaned_df["addiction_level"].unique())
+
+    st.session_state.selected_stress = sorted(cleaned_df["stress_level"].unique())
+
+    st.session_state.selected_label = sorted(cleaned_df["addicted_label"].unique())
+
+    st.session_state.selected_age = (
+        int(cleaned_df["age"].min()),
+        int(cleaned_df["age"].max())
+    )
+
+    st.rerun()
+#Filtered Dataframe
+filtered_df = cleaned_df.copy()
+
+# Gender
+if st.session_state.selected_gender:
+    filtered_df = filtered_df[
+        filtered_df["gender"].isin(st.session_state.selected_gender)
+    ]
+
+# Addiction Level
+if st.session_state.selected_addiction:
+    filtered_df = filtered_df[
+        filtered_df["addiction_level"].isin(st.session_state.selected_addiction)
+    ]
+
+# Stress Level
+if st.session_state.selected_stress:
+    filtered_df = filtered_df[
+        filtered_df["stress_level"].isin(st.session_state.selected_stress)
+    ]
+
+# Addiction Label
+if st.session_state.selected_label:
+    filtered_df = filtered_df[
+        filtered_df["addicted_label"].isin(st.session_state.selected_label)
+    ]
+
+# Age
+filtered_df = filtered_df[
+    filtered_df["age"].between(
+        st.session_state.selected_age[0],
+        st.session_state.selected_age[1]
+    )
+]
 # 📊 DIGITAL WELLNESS VISUALIZATIONS
 
 st.header("📊 Visualization and Insights")
 st.markdown("---")
 st.subheader("1️⃣ Average Daily Screen Time by Gender")
-bar_df=cleaned_df.groupby("gender",as_index=False)["daily_screen_time_hours"].mean()
+bar_df=filtered_df.groupby("gender",as_index=False)["daily_screen_time_hours"].mean()
 fig=px.bar(bar_df,
         x="gender",
         y="daily_screen_time_hours",
@@ -304,7 +433,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 2️⃣ Screen Time Trend by Age
 st.subheader("2️⃣ Screen Time Trend Across Different Age Groups")
 
-line_df = cleaned_df.groupby(["age","gender"], as_index=False)["daily_screen_time_hours"].mean()
+line_df = filtered_df.groupby(["age","gender"], as_index=False)["daily_screen_time_hours"].mean()
 
 fig = px.line(
     line_df,
@@ -324,7 +453,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 # 3️⃣ Screen Time vs Sleep Duration
 st.subheader("3️⃣ Relationship Between Daily Screen Time and Sleep Duration")
-sample_df = cleaned_df.sample(n=250, random_state=42)  # Sample 250 records for better visualization
+sample_df = filtered_df.sample(n=250, random_state=42)  # Sample 250 records for better visualization
 fig = px.scatter(
     sample_df,
     x="daily_screen_time_hours",
@@ -346,7 +475,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("4️⃣ Daily Screen Time Distribution Across Addiction Levels")
 
 fig = px.box(
-    cleaned_df,
+    filtered_df,
     x="addiction_level",
     y="daily_screen_time_hours",
     color="gender",
@@ -364,7 +493,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("5️⃣ Social Media Usage Across Different Stress Levels")
 
 fig = px.violin(
-    cleaned_df,
+    filtered_df,
     x="stress_level",
     y="social_media_hours",
     color="gender",
@@ -383,7 +512,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("6️⃣ Distribution of Daily Screen Time Among Users")
 
 fig = px.histogram(
-    cleaned_df,
+    filtered_df,
     x="daily_screen_time_hours",
     color="addicted_label",
     nbins=20,
@@ -401,7 +530,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 7️⃣ Percentage of Users by Addiction Level
 st.subheader("7️⃣ User Distribution Based on Addiction Level")
 
-pie_df = cleaned_df["addiction_level"].value_counts().reset_index()
+pie_df = filtered_df["addiction_level"].value_counts().reset_index()
 pie_df.columns = ["addiction_level","Count"]
 
 fig = px.pie(
@@ -422,7 +551,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 8️⃣ Gender-wise Addiction Level Composition
 st.subheader("8️⃣ Gender-wise Distribution of Digital Addiction Levels")
 
-tree_df = cleaned_df.groupby(
+tree_df = filtered_df.groupby(
     ["gender","addiction_level"]
 ).size().reset_index(name="Count")
 
@@ -441,7 +570,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 9️⃣ Gender, Stress Level and Addiction Analysis
 st.subheader("9️⃣ Hierarchical Analysis of Gender, Stress Level and Digital Addiction")
 
-sun_df = cleaned_df.groupby(
+sun_df = filtered_df.groupby(
     ["gender","stress_level","addiction_level"]
 ).size().reset_index(name="Count")
 
@@ -459,8 +588,8 @@ st.plotly_chart(fig, use_container_width=True)
 # 🔟 Stress Level vs Addiction Level Heatmap
 st.subheader("🔟 Relationship Between Stress Level and Digital Addiction")
 heat_df = pd.crosstab(
-    df["stress_level"],
-    df["addiction_level"]
+    filtered_df["stress_level"],
+    filtered_df["addiction_level"]
 )
 
 fig = px.imshow(
@@ -479,7 +608,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
 
 fig = px.density_heatmap(
-    df,
+    filtered_df,
     x="daily_screen_time_hours",
     y="sleep_hours",
     nbinsx=10,
@@ -501,7 +630,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 1️⃣1️⃣ Digital Addiction Funnel Analysis
 st.subheader("1️⃣1️⃣ User Progression Across Digital Addiction Levels")
 
-funnel_df = cleaned_df["addiction_level"].value_counts().reset_index()
+funnel_df = filtered_df["addiction_level"].value_counts().reset_index()
 funnel_df.columns = ["addiction_level","Count"]
 
 fig = px.funnel(
