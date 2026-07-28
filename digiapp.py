@@ -1,12 +1,14 @@
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 import streamlit as st
 
 st.set_page_config(
     page_title="Digital Detox",
-    page_icon="⚕️",
+    page_icon="🔎",
     layout="wide",
 )
 st.title("Digital Detox: Intelligent Insights for Digital Well-being")   
@@ -74,12 +76,11 @@ st.markdown("""
     - Generate meaningful insights to encourage healthier digital habits.
  """)
 @st.cache_data
-@st.cache_data
 def load_data():
 
     try:
 
-        df = pd.read_csv("dataset/digital_detox.csv")
+        df = pd.read_csv("digital_detox.csv")
 
         return df
 
@@ -95,7 +96,7 @@ df = load_data()
 if df is None:
 
     st.stop()
-st.header("Data Overview")
+st.markdown("---")
 # Create Basic Dataset Information table
 dataset_info = pd.DataFrame({
     "Attribute": [
@@ -257,64 +258,268 @@ with tab4:
         use_container_width=True
 
     )
-
-# -------------------------------
-# Data Cleaning
-# -------------------------------
-
 @st.cache_data
-def clean_data(df):
+def cleaned_data():
+    try:
+        cleaned_df=df.copy()
+        #replace missing value symbols
+        cleaned_df.replace(["??","###","N/A","NaN"],np.nan,inplace=True)
+        #remove duplicate rows
+        cleaned_df.drop_duplicates(inplace=True, ignore_index=True)
 
-    cleaned_df = df.copy()
+        #fill missing values 
+        for col in cleaned_df.columns:
+            if cleaned_df[col].dtype in [np.float64, np.int64]:
+                cleaned_df[col].fillna(cleaned_df[col].mean(), inplace=True)
+            else:
+                cleaned_df[col].fillna(cleaned_df[col].mode()[0], inplace=True)
+        return cleaned_df
+    except Exception as e:
+        st.error(f"Error cleaning dataset: {e}")
+        return None
+cleaned_df = cleaned_data()
 
-    # Replace missing value symbols
-    cleaned_df.replace(["??", "###", "-", "NA", "N/A"], np.nan, inplace=True)
+# 📊 DIGITAL WELLNESS VISUALIZATIONS
 
-    # Remove duplicate rows
-    cleaned_df.drop_duplicates(inplace=True, ignore_index=True)
-
-    # Fill missing values
-    for col in cleaned_df.columns:
-
-        if pd.api.types.is_numeric_dtype(cleaned_df[col]):
-
-            cleaned_df[col] = cleaned_df[col].fillna(
-                cleaned_df[col].median()
-            )
-
-        else:
-
-            cleaned_df[col] = cleaned_df[col].fillna(
-                cleaned_df[col].mode()[0]
-            )
-
-    return cleaned_df
+st.header("📊 Visualization and Insights")
+st.markdown("---")
+st.subheader("1️⃣ Average Daily Screen Time by Gender")
+bar_df=cleaned_df.groupby("gender",as_index=False)["daily_screen_time_hours"].mean()
+fig=px.bar(bar_df,
+        x="gender",
+        y="daily_screen_time_hours",
+        text_auto=".2f",
+        title="Average Daily Screen Time by Gender",
+        labels={
+            "gender": "Gender",
+            "daily_screen_time_hours": "Average Daily Screen Time (Hours)"
+        }
+)
+fig.update_layout(title_x=0.5, title_font=dict(size=20), xaxis_title_font=dict(size=14), yaxis_title_font=dict(size=14),
+    xaxis_title="Gender", yaxis_title="Average Daily Screen Time (Hours)"
+)
+st.plotly_chart(fig, use_container_width=True)
 
 
-cleaned_df = clean_data(df)
-st.header("Visualization")
-st.subheader("Average Screen Time By Age")
-age_avg = df.groupby("age", as_index=False)["daily_screen_time_hours"].mean()
+# 2️⃣ Screen Time Trend by Age
+st.subheader("2️⃣ Screen Time Trend Across Different Age Groups")
+
+line_df = cleaned_df.groupby(["age","gender"], as_index=False)["daily_screen_time_hours"].mean()
 
 fig = px.line(
-    age_avg,
+    line_df,
     x="age",
     y="daily_screen_time_hours",
-    markers=True
+    color="gender",
+    markers=True,
+    title="Average Screen Time by Age and Gender"
 )
 
 fig.update_layout(
-    title={
-        "text":"Average Screen Time by Age",
-        "x":0.5,
-        "font":dict(size=22)
-    },
-    xaxis_title="Age",
-    yaxis_title="Average Screen Time (Hours)",
-
-    height=500,
-    width=850,
-    font=dict(size=14)
+    template="plotly_white",
+    title_x=0.5
 )
 
-st.ploty_chart(fig,use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
+
+# 3️⃣ Screen Time vs Sleep Duration
+st.subheader("3️⃣ Relationship Between Daily Screen Time and Sleep Duration")
+sample_df = cleaned_df.sample(n=250, random_state=42)  # Sample 250 records for better visualization
+fig = px.scatter(
+    sample_df,
+    x="daily_screen_time_hours",
+    y="sleep_hours",
+    color="addicted_label",
+    hover_data=["age","gender"],
+    title="Daily Screen Time vs Sleep Hours"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5
+    
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 4️⃣ Screen Time Distribution by Addiction Level
+st.subheader("4️⃣ Daily Screen Time Distribution Across Addiction Levels")
+
+fig = px.box(
+    cleaned_df,
+    x="addiction_level",
+    y="daily_screen_time_hours",
+    color="gender",
+    title="Screen Time Distribution by Addiction Level"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 5️⃣ Social Media Usage by Stress Level
+st.subheader("5️⃣ Social Media Usage Across Different Stress Levels")
+
+fig = px.violin(
+    cleaned_df,
+    x="stress_level",
+    y="social_media_hours",
+    color="gender",
+    box=True,
+    title="Social Media Usage across Stress Levels"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 6️⃣ Distribution of Daily Screen Time
+st.subheader("6️⃣ Distribution of Daily Screen Time Among Users")
+
+fig = px.histogram(
+    cleaned_df,
+    x="daily_screen_time_hours",
+    color="addicted_label",
+    nbins=20,
+    title="Distribution of Daily Screen Time"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5,
+    bargap=0.05
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 7️⃣ Percentage of Users by Addiction Level
+st.subheader("7️⃣ User Distribution Based on Addiction Level")
+
+pie_df = cleaned_df["addiction_level"].value_counts().reset_index()
+pie_df.columns = ["addiction_level","Count"]
+
+fig = px.pie(
+    pie_df,
+    names="addiction_level",
+    values="Count",
+    hole=0.45,
+    title="Distribution of Addiction Levels"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 8️⃣ Gender-wise Addiction Level Composition
+st.subheader("8️⃣ Gender-wise Distribution of Digital Addiction Levels")
+
+tree_df = cleaned_df.groupby(
+    ["gender","addiction_level"]
+).size().reset_index(name="Count")
+
+fig = px.treemap(
+    tree_df,
+    path=["gender","addiction_level"],
+    values="Count",
+    color="addiction_level",
+    title="Treemap of Gender and Addiction Level"
+)
+
+fig.update_layout(title_x=0.5)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 9️⃣ Gender, Stress Level and Addiction Analysis
+st.subheader("9️⃣ Hierarchical Analysis of Gender, Stress Level and Digital Addiction")
+
+sun_df = cleaned_df.groupby(
+    ["gender","stress_level","addiction_level"]
+).size().reset_index(name="Count")
+
+fig = px.sunburst(
+    sun_df,
+    path=["gender","stress_level","addiction_level"],
+    values="Count",
+    title="Gender, Stress Level and Addiction Level"
+)
+
+fig.update_layout(title_x=0.5)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 🔟 Stress Level vs Addiction Level Heatmap
+st.subheader("🔟 Relationship Between Stress Level and Digital Addiction")
+heat_df = pd.crosstab(
+    df["stress_level"],
+    df["addiction_level"]
+)
+
+fig = px.imshow(
+    heat_df,
+    text_auto=True,
+    aspect="auto",
+    title="Stress Level vs Addiction Level"
+)
+
+fig.update_layout(
+    title_x=0.5
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
+
+fig = px.density_heatmap(
+    df,
+    x="daily_screen_time_hours",
+    y="sleep_hours",
+    nbinsx=10,
+    nbinsy=10,
+    color_continuous_scale="Viridis",
+    title="Density of Daily Screen Time and Sleep Hours"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5,
+    xaxis_title="Daily Screen Time (Hours)",
+    yaxis_title="Sleep Hours",
+    coloraxis_colorbar_title="User Count"
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# 1️⃣1️⃣ Digital Addiction Funnel Analysis
+st.subheader("1️⃣1️⃣ User Progression Across Digital Addiction Levels")
+
+funnel_df = cleaned_df["addiction_level"].value_counts().reset_index()
+funnel_df.columns = ["addiction_level","Count"]
+
+fig = px.funnel(
+    funnel_df,
+    x="Count",
+    y="addiction_level",
+    title="Users across Addiction Levels"
+)
+
+fig.update_layout(
+    template="plotly_white",
+    title_x=0.5,
+    height=800
+
+
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+
+
