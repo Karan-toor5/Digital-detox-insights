@@ -674,6 +674,81 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("---")
 
+st.header("📊 Project Conclusion and Recommendations")
+st.markdown("---")
 
+st.header("📋 Data Analysis Summary")
 
+st.markdown("""
+This comprehensive analysis of the **Digital Detox** dataset provides valuable insights into users' digital behavior,
+screen-time patterns, sleep habits, stress levels, and smartphone addiction. Through interactive visualizations and
+statistical analysis, the dashboard identifies key relationships between technology usage and overall digital
+well-being. The findings help users, researchers, educators, and organizations better understand digital habits
+and promote healthier technology usage.
+""")
+
+st.markdown("---")
+
+st.header("🔍 Major Findings & Insights")
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    st.subheader("📱 Screen Time & Usage")
+
+    st.markdown("""
+- **High Screen-Time Trend:** Users with higher daily screen time generally spend more hours on social media and gaming.
+- **Weekend Usage Increase:** Weekend screen time is noticeably higher than weekday usage for many users.
+- **Notification Influence:** Frequent app openings and notifications are associated with increased screen-time behavior.
+- **Digital Dependency:** Excessive digital usage indicates a greater likelihood of smartphone addiction.
+""")
+
+    st.subheader("😴 Sleep & Well-being")
+
+    st.markdown("""
+- **Reduced Sleep Duration:** Higher screen time is commonly associated with reduced sleep duration.
+- **Healthy Usage Habits:** Users with balanced screen habits tend to maintain better sleep schedules.
+- **Sleep Quality Impact:** Poor sleep patterns are more frequently observed among highly addicted users.
+- **Well-being Improvement:** Managing screen time can contribute to improved overall health and well-being.
+""")
+
+    st.subheader("😟 Stress & Academic Impact")
+
+    st.markdown("""
+- **Stress Association:** Increased social media usage is often linked with higher stress levels.
+- **Addiction & Stress:** Highly addicted users are more likely to experience elevated stress.
+- **Academic Performance:** Excessive digital usage negatively affects work and academic productivity.
+- **Balanced Lifestyle:** Limiting unnecessary screen time may help improve focus and reduce stress.
+""")
+
+with col2:
+
+    st.subheader("📊 Addiction Analysis")
+
+    st.markdown("""
+- **Addiction Distribution:** Most users belong to the Low and Moderate addiction categories.
+- **High-Risk Users:** High addiction users spend significantly more time on digital devices.
+- **Usage Pattern:** Addiction levels increase with greater screen time and notification frequency.
+- **Behavioral Difference:** Screen-time distribution clearly distinguishes addiction categories.
+""")
+
+    st.subheader("👥 User Behaviour")
+
+    st.markdown("""
+- **Age-Based Differences:** Screen-time habits vary across different age groups.
+- **Gender Comparison:** Male and female users exhibit different digital usage patterns.
+- **Notification Effect:** Higher notification frequency encourages more frequent phone usage.
+- **Lifestyle Influence:** Multiple lifestyle factors collectively affect digital well-being.
+""")
+
+    st.markdown("### 📊 Dashboard Insights")
+
+st.markdown("""
+- **Interactive Visualization:** Interactive charts simplify the analysis of digital wellness patterns and user behavior.
+- **Advanced Data Exploration:** Sidebar filters enable users to explore and compare data across different demographic and behavioral categories.
+- **Digital Wellness Awareness:** The dashboard promotes awareness of healthy digital habits by presenting meaningful and actionable insights.
+- **User-Friendly Interface:** An intuitive Streamlit interface makes data exploration simple and accessible for both technical and non-technical users.
+""")
