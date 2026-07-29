@@ -742,6 +742,48 @@ with col2:
 - **Notification Effect:** Higher notification frequency encourages more frequent phone usage.
 - **Lifestyle Influence:** Multiple lifestyle factors collectively affect digital well-being.
 """)
+st.markdown("---")
+st.header("💡 Recommendations")
+
+with st.expander("👨‍🎓 For Students"):
+    st.markdown("""
+- Limit non-academic screen time to maintain a healthy study-life balance.
+- Enable Focus Mode or Do Not Disturb while studying.
+- Take regular breaks using the 20-20-20 rule to reduce eye strain.
+- Prioritize adequate sleep instead of late-night device usage.
+""")
+
+with st.expander("💼 For Working Professionals"):
+    st.markdown("""
+- Schedule regular digital breaks during work hours.
+- Reduce unnecessary notifications to improve productivity.
+- Maintain a balance between work-related and personal screen time.
+- Follow healthy screen usage habits to reduce stress and burnout.
+""")
+
+with st.expander("👨‍👩‍👧 For Parents & Guardians"):
+    st.markdown("""
+- Encourage healthy digital habits at home.
+- Monitor children's screen time without excessive restrictions.
+- Promote outdoor activities and family interactions.
+- Educate children about responsible technology usage.
+""")
+
+with st.expander("🏫 For Educational Institutions"):
+    st.markdown("""
+- Conduct digital wellness awareness programs.
+- Encourage balanced use of digital learning platforms.
+- Support students in maintaining healthy online habits.
+- Promote regular offline recreational activities.
+""")
+
+with st.expander("📱 For App Developers & Policymakers"):
+    st.markdown("""
+- Design features that encourage mindful technology usage.
+- Introduce built-in screen time reminders and usage reports.
+- Develop policies that promote responsible digital behavior.
+- Support initiatives focused on digital well-being.
+""")
 
     st.markdown("### 📊 Dashboard Insights")
     st.markdown("""
@@ -750,3 +792,4 @@ with col2:
 - **Digital Wellness Awareness:** The dashboard promotes awareness of healthy digital habits by presenting meaningful and actionable insights.
 - **User-Friendly Interface:** An intuitive Streamlit interface makes data exploration simple and accessible for both technical and non-technical users.
 """)
+    
