@@ -493,8 +493,11 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-st.markdown("""#### Key Insights:
+st.markdown("#### Key Insights:")
+st.markdown("""
     - Explores the relationship between screen time and sleep duration.
+    - Helps identify if higher screen time is associated with reduced sleep hours.
+    - Useful for understanding the impact of digital device usage on sleep quality.
 """)
 # 4️⃣ Screen Time Distribution by Addiction Level
 st.subheader("4️⃣ Daily Screen Time Distribution Across Addiction Levels")
@@ -513,6 +516,12 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Compares screen time across different addiction levels.
+    - Useful for identifying patterns of excessive screen time among addicted users.
+    - Higher addiction levels are generally associated with increased daily screen time.
+""")
 
 # 5️⃣ Social Media Usage by Stress Level
 st.subheader("5️⃣ Social Media Usage Across Different Stress Levels")
@@ -532,6 +541,13 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Analyzes social media usage patterns based on stress levels.
+    - Wide violin sections indicate more users with similar social media usage at that stress level.
+    - Helps identify if higher stress levels correlate with increased social media usage.
+
+""")
 
 # 6️⃣ Distribution of Daily Screen Time
 st.subheader("6️⃣ Distribution of Daily Screen Time Among Users")
@@ -551,6 +567,12 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Shows the distribution of daily screen time among users.
+    - Helps identify common ranges of screen time and the proportion of addicted vs non-addicted users.
+    - Useful for understanding overall digital engagement patterns in the dataset.
+""")
 
 # 7️⃣ Percentage of Users by Addiction Level
 st.subheader("7️⃣ User Distribution Based on Addiction Level")
@@ -572,6 +594,12 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Visualizes the proportion of users across different addiction levels.
+    - Helps understand the overall distribution of digital addiction in the dataset.
+    - Quickly identifies the most common addiction levels among users.
+""")
 
 # 8️⃣ Gender-wise Addiction Level Composition
 st.subheader("8️⃣ Gender-wise Distribution of Digital Addiction Levels")
@@ -591,6 +619,13 @@ fig = px.treemap(
 fig.update_layout(title_x=0.5)
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Displays the hierarchical distribution of addiction levels within each gender.
+    - Helps identify which gender has a higher proportion of users in specific addiction levels.
+    - Large rectangles indicate a higher number of users in that category.
+
+""")
 
 # 9️⃣ Gender, Stress Level and Addiction Analysis
 st.subheader("9️⃣ Hierarchical Analysis of Gender, Stress Level and Digital Addiction")
@@ -609,6 +644,12 @@ fig = px.sunburst(
 fig.update_layout(title_x=0.5)
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Shows the hierarchical relationship between gender, stress level, and addiction level.
+    - Helps identify patterns of stress and addiction across different genders.
+    - Reveals how addiction varies across stress categories.
+""")
 
 # 🔟 Stress Level vs Addiction Level Heatmap
 st.subheader("🔟 Relationship Between Stress Level and Digital Addiction")
@@ -629,6 +670,13 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Displays the frequency of users across stress and addiction levels.
+    - Darker colors indicate higher concentrations of users.
+    - Helps identify if higher stress levels are associated with higher addiction levels.
+
+""")
 
 #st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
 
@@ -674,6 +722,12 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Visualizes the number of users at each addiction level in a funnel format.
+    - Shows whether the user population decrerases or increases as addiction levels change.
+    - Highlights the most populated addiction category.
+""")
 st.markdown("---")
 
 st.header("📊 Project Conclusion and Recommendations")
