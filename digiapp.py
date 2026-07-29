@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -80,7 +79,7 @@ def load_data():
 
     try:
 
-        df = pd.read_csv("dataset/digital_detox.csv")
+        df = pd.read_csv("digital_detox.csv")
 
         return df
 
@@ -153,11 +152,12 @@ with col4:
             "Memory Usage",
             f"{memory:.2f} MB"
   )
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📋 Column Information",
     "❗ Missing Values",
     "📝 Sample Data",
-    "📊 Statistical Summary"
+    "📊 Statistical Summary",
+    " Categorical Data"
 ])
 with tab1:
 
@@ -258,6 +258,16 @@ with tab4:
         use_container_width=True
 
     )
+with tab5:
+    st.subheader("Categorical Columns Summary")
+    categorical_cols=df.select_dtypes(include=["object"]).columns
+    for col in categorical_cols:
+        st.markdown(f"### Column: {col}")
+        st.write(f"Unique Values: {df[col].nunique()}")        
+        value_counts = df[col].value_counts().reset_index()
+        value_counts.columns = [col, "Count"]
+        st.dataframe(value_counts, use_container_width=True)
+        st.divider()
 @st.cache_data
 def cleaned_data():
     try:
@@ -428,6 +438,12 @@ fig.update_layout(title_x=0.5, title_font=dict(size=20), xaxis_title_font=dict(s
     xaxis_title="Gender", yaxis_title="Average Daily Screen Time (Hours)"
 )
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Compares the average daily screen time of different genders.
+    - Helps identify which gender spends more time on digital devices.
+    - Useful for understanding gender-based screen time behavior.
+""")
 
 
 # 2️⃣ Screen Time Trend by Age
@@ -450,6 +466,12 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+st.markdown("#### Key Insights:")
+st.markdown("""
+    - Shows how average daily screen time varies across different age groups.
+    - Highlights increasing or decreasing screen time trends with age.
+    - Identifies age groups with higher digital engagement.
+""")
 
 # 3️⃣ Screen Time vs Sleep Duration
 st.subheader("3️⃣ Relationship Between Daily Screen Time and Sleep Duration")
@@ -470,7 +492,9 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
+st.markdown("""#### Key Insights:
+    - Explores the relationship between screen time and sleep duration.
+""")
 # 4️⃣ Screen Time Distribution by Addiction Level
 st.subheader("4️⃣ Daily Screen Time Distribution Across Addiction Levels")
 
@@ -605,27 +629,27 @@ fig.update_layout(
 
 st.plotly_chart(fig, use_container_width=True)
 
-st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
+#st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
 
-fig = px.density_heatmap(
-    filtered_df,
-    x="daily_screen_time_hours",
-    y="sleep_hours",
-    nbinsx=10,
-    nbinsy=10,
-    color_continuous_scale="Viridis",
-    title="Density of Daily Screen Time and Sleep Hours"
-)
+#fig = px.density_heatmap(
+#    filtered_df,
+#    x="daily_screen_time_hours",
+#    y="sleep_hours",
+#    nbinsx=10,
+#    nbinsy=10,
+#    color_continuous_scale="Viridis",
+#    title="Density of Daily Screen Time and Sleep Hours"
+#)
 
-fig.update_layout(
-    template="plotly_white",
-    title_x=0.5,
-    xaxis_title="Daily Screen Time (Hours)",
-    yaxis_title="Sleep Hours",
-    coloraxis_colorbar_title="User Count"
-)
+#fig.update_layout(
+#    template="plotly_white",
+#    title_x=0.5,
+#    xaxis_title="Daily Screen Time (Hours)",
+#    yaxis_title="Sleep Hours",
+#    coloraxis_colorbar_title="User Count"
+#)
 
-st.plotly_chart(fig, use_container_width=True)
+#st.plotly_chart(fig, use_container_width=True)
 
 # 1️⃣1️⃣ Digital Addiction Funnel Analysis
 st.subheader("1️⃣1️⃣ User Progression Across Digital Addiction Levels")
