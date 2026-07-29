@@ -310,6 +310,12 @@ if "selected_stress" not in st.session_state:
 if "selected_label" not in st.session_state:
     st.session_state.selected_label = sorted(cleaned_df["addicted_label"].unique())
 
+if "selected_sleep_range" not in st.session_state:
+    st.session_state.selected_sleep_range = (
+        float(cleaned_df["sleep_hours"].min()),
+        float(cleaned_df["sleep_hours"].max())
+    )
+
 # Sidebar Filters
 with st.sidebar:
 
@@ -341,6 +347,12 @@ with st.sidebar:
         max_value=int(cleaned_df["age"].max()),
         value=st.session_state.selected_age
     )
+    sleep = st.slider(
+    "😴 Sleep Hours",
+    min_value=float(cleaned_df["sleep_hours"].min()),
+    max_value=float(cleaned_df["sleep_hours"].max()),
+    value=st.session_state.selected_sleep_range
+    )
 
     col1, col2 = st.columns(2)
 
@@ -368,6 +380,11 @@ if apply:
     st.session_state.selected_label = label
 
     st.session_state.selected_age = age
+
+    st.session_state.selected_sleep_range = (
+    float(sleep[0]),
+    float(sleep[1])
+    )
 #Reset Filters   
 if reset:
 
@@ -384,6 +401,10 @@ if reset:
         int(cleaned_df["age"].max())
     )
 
+    st.session_state.selected_sleep_range = (
+    float(cleaned_df["sleep_hours"].min()),
+    float(cleaned_df["sleep_hours"].max())
+    )
     st.rerun()
 #Filtered Dataframe
 filtered_df = cleaned_df.copy()
@@ -417,6 +438,13 @@ filtered_df = filtered_df[
     filtered_df["age"].between(
         st.session_state.selected_age[0],
         st.session_state.selected_age[1]
+    )
+]
+#Sleep hours
+filtered_df = filtered_df[
+    filtered_df["sleep_hours"].between(
+        st.session_state.selected_sleep_range[0],
+        st.session_state.selected_sleep_range[1]
     )
 ]
 # 📊 DIGITAL WELLNESS VISUALIZATIONS
