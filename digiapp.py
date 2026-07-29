@@ -79,7 +79,7 @@ def load_data():
 
     try:
 
-        df = pd.read_csv("digital_detox.csv")
+        df = pd.read_csv("dataset/digital_detox.csv")
 
         return df
 
@@ -157,7 +157,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "❗ Missing Values",
     "📝 Sample Data",
     "📊 Statistical Summary",
-    " Categorical Data"
+    "📂 Categorical Data"
 ])
 with tab1:
 
@@ -259,7 +259,7 @@ with tab4:
 
     )
 with tab5:
-    st.subheader("Categorical Columns Summary")
+    st.subheader("📂 Categorical Columns Summary")
     categorical_cols=df.select_dtypes(include=["object"]).columns
     for col in categorical_cols:
         st.markdown(f"### Column: {col}")
@@ -335,7 +335,7 @@ with st.sidebar:
     )
 
     age = st.slider(
-        "🎂 Age",
+        "💠 Age",
         min_value=int(cleaned_df["age"].min()),
         max_value=int(cleaned_df["age"].max()),
         value=st.session_state.selected_age
