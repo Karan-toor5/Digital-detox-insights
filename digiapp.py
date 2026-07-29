@@ -7,7 +7,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Digital Detox",
-    page_icon="🔎",
+    page_icon="",
     layout="wide",
 )
 st.title("Digital Detox: Intelligent Insights for Digital Well-being")   
