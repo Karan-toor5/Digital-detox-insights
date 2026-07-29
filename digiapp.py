@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import streamlit as st
-from PTL import Image
+from PTL import image
 #icon_image=Image.open("1785324228193.png")
 st.set_page_config(
     page_title="Digital Detox",
