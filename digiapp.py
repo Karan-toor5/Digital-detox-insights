@@ -792,4 +792,57 @@ with st.expander("📱 For App Developers & Policymakers"):
 - **Digital Wellness Awareness:** The dashboard promotes awareness of healthy digital habits by presenting meaningful and actionable insights.
 - **User-Friendly Interface:** An intuitive Streamlit interface makes data exploration simple and accessible for both technical and non-technical users.
 """)
-    
+st.markdown("---")
+st.header("🎯 Final Conclusion")
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col1:
+    st.metric(
+        "Total Users Analyzed",
+        f"{filtered_df.shape[0]:,}"
+    )
+
+with col2:
+    st.metric(
+        "Average Screen Time",
+        f"{filtered_df['daily_screen_time_hours'].mean():.2f} hrs"
+    )
+
+with col3:
+    st.metric(
+        "Average Sleep",
+        f"{filtered_df['sleep_hours'].mean():.2f} hrs"
+    )
+
+with col4:
+    addicted = (filtered_df["addicted_label"].mean()*100)
+    st.metric(
+        "Addiction Rate",
+        f"{addicted:.1f}%"
+    )
+
+with col5:
+    st.metric(
+        "Avg. Social Media",
+        f"{filtered_df['social_media_hours'].mean():.2f} hrs"
+    )
+st.markdown("### 🌍 Project Impact")
+
+st.markdown("""
+This project provides a comprehensive analysis of digital device usage patterns and their impact on users' lifestyle, sleep quality, stress levels, and overall digital well-being. The interactive dashboard enables meaningful exploration of screen-time behavior and supports data-driven awareness for healthier technology usage.
+""")
+
+st.markdown("#### Key Outcomes")
+
+st.markdown("""
+1. **Screen Time Awareness:** Highlights how excessive screen usage influences users' daily routines.
+
+2. **Sleep & Health Analysis:** Demonstrates the relationship between screen time and sleep duration.
+
+3. **Stress Evaluation:** Shows how increased digital engagement is associated with higher stress levels.
+
+4. **Behavioral Insights:** Identifies patterns in social media usage, gaming, and work/study activities.
+
+5. **Digital Well-being Support:** Encourages balanced technology use through interactive visual analytics.
+""")
