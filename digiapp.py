@@ -736,7 +736,6 @@ with col2:
 """)
 
     st.subheader("👥 User Behaviour")
-
     st.markdown("""
 - **Age-Based Differences:** Screen-time habits vary across different age groups.
 - **Gender Comparison:** Male and female users exhibit different digital usage patterns.
@@ -745,8 +744,7 @@ with col2:
 """)
 
     st.markdown("### 📊 Dashboard Insights")
-
-st.markdown("""
+    st.markdown("""
 - **Interactive Visualization:** Interactive charts simplify the analysis of digital wellness patterns and user behavior.
 - **Advanced Data Exploration:** Sidebar filters enable users to explore and compare data across different demographic and behavioral categories.
 - **Digital Wellness Awareness:** The dashboard promotes awareness of healthy digital habits by presenting meaningful and actionable insights.
