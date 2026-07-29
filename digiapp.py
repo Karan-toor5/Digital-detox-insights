@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import streamlit as st
-
+from PTL import Image
+icon_image=Image.open("1785324228193.png")
 st.set_page_config(
     page_title="Digital Detox",
-    page_icon="",
+    page_icon="icon_image",
     layout="wide",
 )
 st.title("Digital Detox: Intelligent Insights for Digital Well-being")   
