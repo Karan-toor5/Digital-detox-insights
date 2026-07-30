@@ -11,6 +11,16 @@ st.set_page_config(
     page_icon="./1785324228193.png",
     layout="wide",
 )
+st.sidebar.divider()
+
+st.sidebar.metric("📂 Dataset", "7,500 Records")
+st.sidebar.metric("📑 Features", "16 Columns")
+
+st.sidebar.info(
+    "This project analyzes screen time, sleep, stress, "
+    "and digital habits to identify addiction patterns "
+    "and provide insights for healthier digital well-being."
+)
 st.title("Digital Detox: Intelligent Insights for Digital Well-being")   
 st.markdown("---")
 st.header("Executive Summary")
