@@ -179,6 +179,88 @@ with tab1:
     })
 
     st.dataframe(column_info, use_container_width=True)
+    st.markdown("##### Detailed Column Description")
+
+st.markdown("""
+- **Age**:
+Represents the age of the user participating in the digital wellness study. It helps analyze how screen-time habits and digital addiction vary across different age groups.
+""")
+
+st.markdown("""
+- **Gender**:
+Specifies the gender of the user (Male, Female, or Other). This column is used to compare digital behavior and screen-time patterns among different genders.
+""")
+
+st.markdown("""
+- **Daily_Screen_Time_Hours**:
+Represents the average number of hours spent using digital devices each day. It is one of the primary indicators for analyzing excessive screen usage and digital addiction.
+""")
+
+st.markdown("""
+- **Social_Media_Hours**:
+Shows the average daily time spent on social media platforms. This helps identify whether social media usage contributes to increased digital addiction.
+""")
+
+st.markdown("""
+- **Gaming_Hours**:
+Indicates the average time spent playing video or mobile games each day. It is useful for evaluating gaming behavior and its impact on total screen time.
+""")
+
+st.markdown("""
+- **Work_Study_Hours**:
+Represents the daily hours spent on work or educational activities using digital devices. This helps distinguish productive screen usage from recreational usage.
+""")
+
+st.markdown("""
+- **Sleep_Hours**:
+Represents the average number of hours the user sleeps each day. Lower sleep duration may indicate unhealthy digital habits caused by excessive screen exposure.
+""")
+
+st.markdown("""
+- **Stress_Level**:
+Represents the stress score of the user. It is used to examine the relationship between stress, screen time, and digital addiction.
+""")
+
+st.markdown("""
+- **Physical_Activity_Hours**:
+Shows the average time spent on physical exercise or outdoor activities. It helps determine whether an active lifestyle reduces digital addiction risk.
+""")
+
+st.markdown("""
+- **Notifications_Per_Day**:
+Represents the total number of notifications received by the user in one day. Frequent notifications may encourage repeated phone checking and increased device engagement.
+""")
+
+st.markdown("""
+- **App_Opens_Per_Day**:
+Shows how many times applications are opened during the day. Higher values indicate more frequent smartphone interaction and usage behavior.
+""")
+
+st.markdown("""
+- **Weekend_Screen_Time**:
+Represents the average screen time during weekends. This helps compare weekday and weekend digital usage patterns.
+""")
+
+st.markdown("""
+- **Screen_Time_Before_Bed**:
+Indicates the amount of screen time before sleeping. Excessive usage before bedtime may negatively affect sleep quality and overall well-being.
+""")
+
+st.markdown("""
+- **Productivity_Score**:
+Represents the productivity level of the user based on daily activities. It is useful for analyzing whether excessive screen time impacts productivity.
+""")
+
+st.markdown("""
+- **Addiction_Level**:
+Classifies users into Mild, Moderate, or Severe digital addiction categories. It serves as the primary outcome variable for behavioral analysis.
+""")
+
+st.markdown("""
+- **Addicted_Label**:
+A binary indicator showing whether a user is digitally addicted (1) or not addicted (0). It is useful for comparing addicted and non-addicted users and identifying important behavioral patterns.
+""")
+
 with tab2:
 
     st.subheader("Missing Value Analysis")
