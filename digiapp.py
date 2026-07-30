@@ -933,8 +933,8 @@ with st.expander("📱 For App Developers & Policymakers"):
 - Support initiatives focused on digital well-being.
 """)
 
-    st.markdown("### 📊 Dashboard Insights")
-    st.markdown("""
+st.markdown("### 📊 Dashboard Insights")
+st.markdown("""
 - **Interactive Visualization:** Interactive charts simplify the analysis of digital wellness patterns and user behavior.
 - **Advanced Data Exploration:** Sidebar filters enable users to explore and compare data across different demographic and behavioral categories.
 - **Digital Wellness Awareness:** The dashboard promotes awareness of healthy digital habits by presenting meaningful and actionable insights.
