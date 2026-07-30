@@ -580,7 +580,7 @@ st.markdown("""
     - Helps identify which gender spends more time on digital devices.
     - Useful for understanding gender-based screen time behavior.
 """)
-
+st.divider()
 
 # 2️⃣ Screen Time Trend by Age
 st.subheader("2️⃣ Screen Time Trend Across Different Age Groups")
@@ -608,6 +608,7 @@ st.markdown("""
     - Highlights increasing or decreasing screen time trends with age.
     - Identifies age groups with higher digital engagement.
 """)
+st.divider()
 
 # 3️⃣ Screen Time vs Sleep Duration
 st.subheader("3️⃣ Relationship Between Daily Screen Time and Sleep Duration")
@@ -634,6 +635,8 @@ st.markdown("""
     - Helps identify if higher screen time is associated with reduced sleep hours.
     - Useful for understanding the impact of digital device usage on sleep quality.
 """)
+st.divider()
+
 # 4️⃣ Screen Time Distribution by Addiction Level
 st.subheader("4️⃣ Daily Screen Time Distribution Across Addiction Levels")
 
@@ -683,6 +686,7 @@ st.markdown("""
     - Helps identify if higher stress levels correlate with increased social media usage.
 
 """)
+st.divider()
 
 # 6️⃣ Distribution of Daily Screen Time
 st.subheader("6️⃣ Distribution of Daily Screen Time Among Users")
@@ -708,6 +712,7 @@ st.markdown("""
     - Helps identify common ranges of screen time and the proportion of addicted vs non-addicted users.
     - Useful for understanding overall digital engagement patterns in the dataset.
 """)
+st.divider()
 
 # 7️⃣ Percentage of Users by Addiction Level
 st.subheader("7️⃣ User Distribution Based on Addiction Level")
@@ -735,6 +740,7 @@ st.markdown("""
     - Helps understand the overall distribution of digital addiction in the dataset.
     - Quickly identifies the most common addiction levels among users.
 """)
+st.divider()
 
 # 8️⃣ Gender-wise Addiction Level Composition
 st.subheader("8️⃣ Gender-wise Distribution of Digital Addiction Levels")
@@ -761,6 +767,7 @@ st.markdown("""
     - Large rectangles indicate a higher number of users in that category.
 
 """)
+st.divider()
 
 # 9️⃣ Gender, Stress Level and Addiction Analysis
 st.subheader("9️⃣ Hierarchical Analysis of Gender, Stress Level and Digital Addiction")
@@ -785,6 +792,7 @@ st.markdown("""
     - Helps identify patterns of stress and addiction across different genders.
     - Reveals how addiction varies across stress categories.
 """)
+st.divider()
 
 # 🔟 Stress Level vs Addiction Level Heatmap
 st.subheader("🔟 Relationship Between Stress Level and Digital Addiction")
@@ -812,6 +820,7 @@ st.markdown("""
     - Helps identify if higher stress levels are associated with higher addiction levels.
 
 """)
+st.divider()
 
 #st.subheader("🔥 Density Heatmap: Daily Screen Time vs Sleep Hours")
 
