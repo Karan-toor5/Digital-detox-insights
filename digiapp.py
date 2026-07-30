@@ -660,7 +660,7 @@ st.markdown("""
     - Useful for identifying patterns of excessive screen time among addicted users.
     - Higher addiction levels are generally associated with increased daily screen time.
 """)
-
+st.divider()
 # 5️⃣ Social Media Usage by Stress Level
 st.subheader("5️⃣ Social Media Usage Across Different Stress Levels")
 
