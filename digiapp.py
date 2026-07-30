@@ -611,7 +611,7 @@ st.markdown("""
 
 # 3️⃣ Screen Time vs Sleep Duration
 st.subheader("3️⃣ Relationship Between Daily Screen Time and Sleep Duration")
-sample_df = filtered_df.sample(n=250, random_state=42)  # Sample 250 records for better visualization
+sample_df = filtered_df.sample(n=250, replace=True, random_state=42)  # Sample 250 records for better visualization
 fig = px.scatter(
     sample_df,
     x="daily_screen_time_hours",
