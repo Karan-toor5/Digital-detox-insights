@@ -13,6 +13,37 @@ st.set_page_config(
 )
 st.sidebar.divider()
 
+# Sidebar Project Details
+
+
+with st.sidebar:
+
+    st.markdown("### 📘 Project Name")
+    st.write("Digital Detox: Intelligent Insights for Digital Well-being")
+
+    st.markdown("### 👨‍🎓 Developed By")
+    st.write("Karandeep Singh")
+
+    st.markdown("### 🎓 Course")
+    st.write("B.Tech CSE (AI & ML)")
+
+    st.markdown("### 🏫 University")
+    st.write("Sant Baba Bhag Singh University")
+
+    st.divider()
+
+    st.markdown("### 💻 Developed Using")
+    st.write("""
+- Python
+- Streamlit
+- Pandas
+- Plotly Express
+""")
+
+    st.divider()
+
+    st.markdown("### 📊 Project Type")
+    st.success("Industrial Training Project")
 st.sidebar.metric("📂 Dataset", "7,500 Records")
 st.sidebar.metric("📑 Features", "16 Columns")
 
