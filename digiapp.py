@@ -8,7 +8,8 @@ import streamlit as st
 #icon_image=image.open("1785324228193.png")
 st.set_page_config(
     page_title="Digital Detox",
-    page_icon="./1785324228193.png",
+    #page_icon="./1785324228193.png",
+    page_icon="📲"
     layout="wide",
 )
 st.sidebar.divider()
