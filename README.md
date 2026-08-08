@@ -145,3 +145,30 @@ Data Visualization
 Digital Wellness Patterns
         ↓
 Insights and Interpretation
+```
+
+## ⚙️ Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Karan-toor5/Digital-detox-insights.git
+   cd Digital-detox-insights
+   ```
+
+2. Install Required Dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. ▶️ Running the Project:
+   ```bash
+   streamlit run digiapp.py
+   ```
+
+   After successful execution, Streamlit will provide a local URL, normally:
+
+   ```text
+   http://localhost:8501
+   ```
+
+   Open this URL in a web browser to access the dashboard.
